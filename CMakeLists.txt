@@ -18,6 +18,7 @@ option(GATTLIB_SHARED_LIB "Build GattLib as a shared library" YES)
 option(GATTLIB_BUILD_DOCS "Build GattLib docs" NO)
 option(GATTLIB_PYTHON_INTERFACE "Build GattLib Python Interface" NO)
 option(GATTLIB_ENABLE_ADDRESS_SANITIZER "Enable address sanitizer" NO)
+option(GATTLIB_INSTALL "Package GattLib" YES)
 
 find_package(PkgConfig REQUIRED)
 find_package(Doxygen)
@@ -171,8 +172,10 @@ endif()
 #
 # List of file to install
 #
-include(GNUInstallDirs)
-install(FILES include/gattlib.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-install(FILES ${PROJECT_BINARY_DIR}/gattlib.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+if (GATTLIB_INSTALL)
+  include(GNUInstallDirs)
+  install(FILES include/gattlib.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  install(FILES ${PROJECT_BINARY_DIR}/gattlib.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+endif()
 
 include(CPack)
